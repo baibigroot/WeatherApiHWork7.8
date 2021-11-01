@@ -1,12 +1,16 @@
 package com.example.weatherapihworknew.ui;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-
 import com.example.weatherapihworknew.R;
 import com.example.weatherapihworknew.databinding.ActivityMapBinding;
+import com.example.weatherapihworknew.utils.Constants;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,27 +22,37 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.gson.Gson;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener {
 
-    private ActivityMapBinding binding;
     private GoogleMap map;
-    private List<LatLng> coords = new ArrayList<>();
+    private LatLng coords = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMapBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_map);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        setupListeners();
+    }
+
+    private void setupListeners() {
+        findViewById(R.id.backTo_btn).setOnClickListener(v -> {
+            if (coords!=null) {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra(Constants.mapResultKey, new Gson().toJson(coords));
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+            else Toast.makeText(this,"Click to the map!",Toast.LENGTH_SHORT).show();
+        });
 
     }
 
@@ -47,15 +61,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.title("Android-3");
-        markerOptions.alpha(0.1f);
-        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.common_full_open_on_phone);
-        markerOptions.icon(bitmapDescriptor);
         markerOptions.draggable(true);
         markerOptions.anchor(0f, 0.7f);
         markerOptions.position(latLng);
         map.addMarker(markerOptions);
 
-        coords.add(latLng);
+        coords = latLng;
+        Log.e("TAG", "onMapClick: "+coords );
     }
 
     @Override

@@ -28,4 +28,24 @@
     <string name="temp_max_third_day">36℃</string>
     <string name="temp_min_thirdDay">24℃</string>
     <string name="content">content</string>
+    <string name="search">Search</string>
+
+
+    <string name="todo">TODO</string>
+    <string name="deg_down">°C↓</string>
+    <string name="deg_up">°C↑</string>
+    <string name="wind">Wind</string>
+    <string name="pressure">Pressure</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="daytime">Daytime</string>
+    <string name="currentWeather">currentWeather</string>
+    <string name="percentage">%</string>
+    <string name="mbar">mBar</string>
+    <string name="m_s">m/s</string>
+    <string name="deg_c">°C</string>
+    <string name="default_city_name">Bishkek, Kyrgyzstan</string>
+    <string name="pm">PM</string>
+    <string name="am">AM</string>
+    <string name="location">Location</string>
 </resources>

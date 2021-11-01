@@ -11,4 +11,6 @@
     <dimen name="dimens_temp_min_nextDay">9sp</dimen>
     <dimen name="dimens_temp_max_thirdDay">9sp</dimen>
     <dimen name="dimens_temp_min_thirdDay">9sp</dimen>
+    <dimen name="image_height">300dp</dimen>
+    <dimen name="layout_margin_top">260dp</dimen>
 </resources>
